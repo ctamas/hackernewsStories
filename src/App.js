@@ -22,9 +22,9 @@ class App extends Component {
   }
 
   // Execute search, query is optional. Operation:
-  // 1, Takes new query param from search component and updates saved query
-  // 2, If no param is given search is repeated with previous query
-  // This is useful to filter stories while they are still being loaded from API
+  // 1, Takes a new query param from search component and updates saved query, uses it to filter.
+  // 2, If no param is given filtering is repeated with previous query.
+  // This is useful to filter as they load and render from the API, as no new params are given.
   handleSearch = query => {
     query = query !== undefined ? query : this.state.query;
     let newStories = this.state.allStories.filter(story => {
@@ -52,7 +52,7 @@ class App extends Component {
       );
   };
 
-  // Load individual news stories and store in state
+  // Load individual news stories and store in state.
   loadNewsStories = newsList => {
     let newStories = [];
     let promises = newsList.map((storyId, index) => {
@@ -63,16 +63,16 @@ class App extends Component {
         .then(
           story => {
             newStories = [...newStories, story];
-            // Render only after a minimum number of stories are loaded for performance
-            // Render when all values are loaded
+            // Render each time a minimum number of new stories are loaded.
+            // Also render when all values are loaded.
             if (!(index % minStoriesLoaded) || index === newsList.length - 1) {
               this.setState(
                 {
                   stories: newStories,
                   allStories: newStories
                 },
-                // Search runs on same update cycle if the searchbox is not empty
-                // This lets searches to be executed before all stories have been loaded
+                // Search runs on same update cycle if the searchbox is not empty.
+                // This lets searches to be executed before all stories have been loaded.
                 () => {
                   if (this.state.query) {
                     this.handleSearch();
@@ -96,25 +96,23 @@ class App extends Component {
   };
 
   getCardDeck() {
-    // Notice placeholder when search is done with no matches
+    // Notice placeholder when search is done with no matches.
     if (!this.state.stories.length && this.state.allStories.length) {
       return <h5 className="card-deck-placeholder">No matches found.</h5>;
     } else if (this.state.allStories.length > minStoriesLoaded) {
-      // Create card deck when minimum of loaded stories are met
+      // Create card deck with cardContainer components inside
       let storyList = this.state.stories.map(story => {
         return <CardContainer key={story.id} story={story} />;
       });
       return <CardDeck>{storyList}</CardDeck>;
-      // Placeholder before any results are loaded
+      // Placeholder loading spinner before any results are loaded.
     } else {
       return (
-        <div className="card-deck-placeholder">
-          <img
-            className="loading-spinner rotate faded"
-            alt="Loading"
-            src={loadingSpinner}
-          />
-        </div>
+        <img
+          className="card-deck-placeholder loading-spinner rotate faded"
+          alt="Loading"
+          src={loadingSpinner}
+        />
       );
     }
   }
@@ -122,7 +120,7 @@ class App extends Component {
   render() {
     let cardDeck = this.getCardDeck();
     let error = this.state.error ? <h3>Error loading stories!</h3> : null;
-    // Loading spinner will only show when a search is done while still loading.
+    // This loading spinner next to the search box will only show when a search is done while still loading.
     // It indicates that results might be partial.
     return (
       <React.Fragment>

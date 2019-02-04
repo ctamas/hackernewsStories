@@ -54,14 +54,14 @@ describe("App", () => {
       let queryGoog = "google";
       let queryFace = "face";
       const wrapper = shallow(<App />);
-      // In our app, filtered stories reside in "stories", and every loaded story in "allStories"
+      // In our app, filtered stories reside in "stories", and every loaded story is in "allStories".
       wrapper.setState({ stories: stories, allStories: stories });
 
-      // All 3 items visible at start
+      // All 3 items visible at start.
       expect(wrapper.state("stories").length).toEqual(3);
       expect(wrapper.state("allStories").length).toEqual(3);
 
-      // Search for google news item
+      // Search for google news item.
       wrapper.instance().handleSearch(queryGoog);
 
       expect(wrapper.state("query")).toEqual(queryGoog);
@@ -69,7 +69,7 @@ describe("App", () => {
       expect(wrapper.state("stories").length).toEqual(1);
       expect(wrapper.state("allStories").length).toEqual(3);
 
-      // Search for facebook news item
+      // Search for facebook news item.
       wrapper.instance().handleSearch(queryFace);
 
       expect(wrapper.state("query")).toEqual(queryFace);
@@ -77,7 +77,7 @@ describe("App", () => {
       expect(wrapper.state("stories").length).toEqual(1);
       expect(wrapper.state("allStories").length).toEqual(3);
 
-      // Repeat previous search by not giving parameter
+      // Repeat previous search by not giving parameter.
       wrapper.instance().handleSearch();
 
       expect(wrapper.state("query")).toEqual(queryFace);
@@ -85,7 +85,7 @@ describe("App", () => {
       expect(wrapper.state("stories").length).toEqual(1);
       expect(wrapper.state("allStories").length).toEqual(3);
 
-      // Clear searchbox
+      // Clear searchbox. All stories should reappear.
       wrapper.instance().handleSearch("");
 
       expect(wrapper.state("query")).toEqual("");

@@ -12,7 +12,7 @@ class ChartContainer extends Component {
   }
 
   handleExpand = event => {
-    // Don't expand if title url is clicked
+    // Don't expand if the title url is clicked.
     if (!event.target.className.includes("card-title")) {
       this.setState({
         expanded: !this.state.expanded ? true : false
@@ -20,12 +20,13 @@ class ChartContainer extends Component {
     }
   };
 
-  // Handle long and short story from when card is expanded or closed
+  // Handle long and short story froms when the card is expanded or closed.
+  // No need to add "..." while card is closed if the story is short enough to fit.
   getStoryText(text) {
-    if (this.state.expanded || this.props.story.title.length < maxLength) {
+    if (this.state.expanded || this.props.story.title.length < maxStoryLength) {
       return text;
     } else {
-      return text.slice(0, maxLength) + "...";
+      return text.slice(0, maxStoryLength) + "...";
     }
   }
 
@@ -57,7 +58,7 @@ class ChartContainer extends Component {
     );
   }
 }
-// Maximum length of story text before being shortened when card is collapsed
-const maxLength = 25;
+// Maximum length of story text before being shortened when card is collapsed.
+const maxStoryLength = 25;
 
 export default ChartContainer;
