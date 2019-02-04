@@ -3,6 +3,12 @@ Live version hosted from branch `gh-pages` at https://ctamas.github.io/hackernew
 Documentation: 
 https://docs.google.com/document/d/1H8ApV3M61Ml_h585-KpeRWHpnWDFjQaTuTBE5NVY2uE/edit?usp=sharing
 
+To run locally:
+ Download zip
+ 
+Install with:
+npm install
+
 Start with: 
 npm start
 
