@@ -1,3 +1,17 @@
+Live version hosted from branch `gh-pages` at https://ctamas.github.io/hackernewsStories/
+
+Documentation: 
+https://docs.google.com/document/d/1H8ApV3M61Ml_h585-KpeRWHpnWDFjQaTuTBE5NVY2uE/edit?usp=sharing
+
+Start with npm start 
+Test with npm test, then enter 'A' for all tests.
+
+
+
+------------------------------------------------------------------------------------
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
