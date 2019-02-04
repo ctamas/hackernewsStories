@@ -3,8 +3,11 @@ Live version hosted from branch `gh-pages` at https://ctamas.github.io/hackernew
 Documentation: 
 https://docs.google.com/document/d/1H8ApV3M61Ml_h585-KpeRWHpnWDFjQaTuTBE5NVY2uE/edit?usp=sharing
 
-Start with npm start 
-Test with npm test, then enter 'A' for all tests.
+Start with: 
+npm start
+
+Test with: 
+npm test, then enter 'A' to run all tests.
 
 
 
