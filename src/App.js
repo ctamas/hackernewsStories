@@ -6,6 +6,7 @@ import Fade from "react-bootstrap/Fade";
 import Search from "./components/search";
 import CardContainer from "./components/cardContainer";
 import loadingSpinner from "./loading.png";
+import newsLogo from "./logo.png";
 import "./App.css";
 
 class App extends Component {
@@ -127,6 +128,7 @@ class App extends Component {
       <React.Fragment>
         <Navbar bg="light">
           <Navbar.Brand className="navbar-title" href="#home">
+            <img alt="" src={newsLogo} className="logo align-center" />
             Hackernews Stories
             <Fade
               className="search-loading-notice rotate"
