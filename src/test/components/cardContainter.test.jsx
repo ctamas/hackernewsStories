@@ -1,6 +1,6 @@
 import React from "react";
 import { mount, configure } from "enzyme";
-import CardContainer from "./cardContainer";
+import CardContainer from "../../components/cardContainer";
 import Adapter from "enzyme-adapter-react-16";
 
 configure({ adapter: new Adapter() });
@@ -17,6 +17,7 @@ describe("CardContainer", () => {
     it("should correctly parse SHORT story data", () => {
       const wrapper = mount(<CardContainer story={story} />);
       const text = wrapper.find(".card-text").text();
+
       expect(text).toEqual("test title");
       wrapper.unmount();
     });
@@ -26,6 +27,7 @@ describe("CardContainer", () => {
 
       const wrapper = mount(<CardContainer story={story} />);
       const text = wrapper.find(".card-text").text();
+
       expect(text).toEqual("long test title long test...");
       wrapper.unmount();
     });
@@ -37,6 +39,7 @@ describe("CardContainer", () => {
       const card = wrapper.find(".card");
       card.simulate("click");
       const text = wrapper.find(".card-text").text();
+
       expect(text).toEqual("long test title long test title long test title");
       wrapper.unmount();
     });
@@ -46,6 +49,7 @@ describe("CardContainer", () => {
     it("should NOT find expanded card class BEFORE clicked", () => {
       const wrapper = mount(<CardContainer story={story} />);
       const hasExpandedCard = wrapper.find(".card").hasClass("card-expanded");
+
       expect(hasExpandedCard).toEqual(false);
       wrapper.unmount();
     });
@@ -55,6 +59,7 @@ describe("CardContainer", () => {
       const card = wrapper.find(".card");
       card.simulate("click");
       const hasExpandedCard = wrapper.find(".card").hasClass("card-expanded");
+
       expect(hasExpandedCard).toEqual(true);
       wrapper.unmount();
     });
@@ -65,6 +70,7 @@ describe("CardContainer", () => {
       card.simulate("click");
       card.simulate("click");
       const hasExpandedCard = wrapper.find(".card").hasClass("card-expanded");
+
       expect(hasExpandedCard).toEqual(false);
       wrapper.unmount();
     });

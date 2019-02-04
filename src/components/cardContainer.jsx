@@ -11,18 +11,21 @@ class ChartContainer extends Component {
     this.handleExpand = this.handleExpand.bind(this);
   }
 
-  handleExpand = () => {
-    this.setState({
-      expanded: !this.state.expanded ? true : false
-    });
+  handleExpand = event => {
+    // Don't expand if title url is clicked
+    if (!event.target.className.includes("card-title")) {
+      this.setState({
+        expanded: !this.state.expanded ? true : false
+      });
+    }
   };
 
   // Handle long and short story from when card is expanded or closed
   getStoryText(text) {
-    if (this.state.expanded || this.props.story.title.length < 25) {
+    if (this.state.expanded || this.props.story.title.length < maxLength) {
       return text;
     } else {
-      return text.slice(0, 25) + "...";
+      return text.slice(0, maxLength) + "...";
     }
   }
 
@@ -33,12 +36,19 @@ class ChartContainer extends Component {
       <Card
         className={expandedClass}
         key={this.props.story.id}
-        onClick={e => this.handleExpand(this.props.story.id, e)}
+        onClick={this.handleExpand}
       >
         <Card.Body>
-          &#9650;{this.props.story.score}
-          <Card.Title>{this.props.story.title}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
+          &#9650; {this.props.story.score}
+          <a
+            className="card-story-url"
+            target="_blank"
+            rel="noopener noreferrer"
+            href={this.props.story.url}
+          >
+            <Card.Title>{this.props.story.title}</Card.Title>
+          </a>
+          <Card.Subtitle className="text-muted">
             by {this.props.story.by}
           </Card.Subtitle>
           <Card.Text>{storyText}</Card.Text>
@@ -47,5 +57,7 @@ class ChartContainer extends Component {
     );
   }
 }
+// Maximum length of story text before being shortened when card is collapsed
+const maxLength = 25;
 
 export default ChartContainer;
